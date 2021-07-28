@@ -1,42 +1,67 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			contacts: []
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+			getContacts: async () => {
+				let response = await fetch("https://assets.breatheco.de/apis/fake/contact/agenda/juans_agenda");
+				let data = await response.json();
+				setStore({ contacts: data });
+				console.log(data);
 			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
-			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
+			addContact: (name, email, phone, address) => {
+				fetch("https://assets.breatheco.de/apis/fake/contact/", {
+					method: "POST",
+					headers: {
+						"Content-type": "application/json"
+					},
+					body: JSON.stringify({
+						full_name: name,
+						phone: phone,
+						email: email,
+						address: address,
+						agenda_slug: "juans_agenda"
+					})
+				}).then(() => {
+					fetch("https://assets.breatheco.de/apis/fake/contact/agenda/juans_agenda")
+						.then(res => res.json())
+						.then(data => {
+							setStore({ contacts: data });
+						});
 				});
-
-				//reset the global store
-				setStore({ demo: demo });
+			},
+			editContact: (id, name, email, phone, address) => {
+				fetch("https://assets.breatheco.de/apis/fake/contact/" + id, {
+					method: "PUT",
+					headers: {
+						"Content-type": "application/json"
+					},
+					body: JSON.stringify({
+						full_name: name,
+						phone: phone,
+						email: email,
+						address: address,
+						agenda_slug: "juans_agenda"
+					})
+				}).then(() => {
+					fetch("https://assets.breatheco.de/apis/fake/contact/agenda/juans_agenda")
+						.then(res => res.json())
+						.then(data => {
+							setStore({ contacts: data });
+						});
+				});
+			},
+			deleteContact: id => {
+				fetch("https://assets.breatheco.de/apis/fake/contact/" + id, {
+					method: "DELETE"
+				}).then(() => {
+					fetch("https://assets.breatheco.de/apis/fake/contact/agenda/juans_agenda")
+						.then(res => res.json())
+						.then(data => {
+							setStore({ contacts: data });
+						});
+				});
 			}
 		}
 	};

@@ -5,8 +5,9 @@ import ScrollToTop from "./component/scrollToTop";
 import { Home } from "./views/home";
 import { Demo } from "./views/demo";
 import { Single } from "./views/single";
+import { Add } from "./views/add_contact";
+import { Edit } from "./views/edit_contact";
 import injectContext from "./store/appContext";
-
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 
@@ -22,12 +23,9 @@ const Layout = () => {
 				<ScrollToTop>
 					<Navbar />
 					<Switch>
-						<Route exact path="/">
-							<Home />
-						</Route>
-						<Route exact path="/demo">
-							<Demo />
-						</Route>
+						<Route exact path="/" component={Home} />
+						<Route exact path="/add" component={Add} />
+						<Route exact path="/edit/:id" component={Edit} />
 						<Route exact path="/single/:theid">
 							<Single />
 						</Route>
@@ -35,7 +33,6 @@ const Layout = () => {
 							<h1>Not found!</h1>
 						</Route>
 					</Switch>
-					<Footer />
 				</ScrollToTop>
 			</BrowserRouter>
 		</div>
