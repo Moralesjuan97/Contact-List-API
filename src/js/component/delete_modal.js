@@ -11,9 +11,9 @@ export const ModalExample = props => {
 
 	const toggle = () => setModal(!modal);
 
-	// const handleDelete = () => {
-	// 	actions.deleteContact(props.id);
-	// };
+	const handleDelete = () => {
+		actions.deleteContact(props.id);
+	};
 
 	return (
 		<div>
@@ -24,9 +24,11 @@ export const ModalExample = props => {
 				<ModalHeader toggle={toggle}>Warning</ModalHeader>
 				<ModalBody>Are you sure you want to delete this contact?</ModalBody>
 				<ModalFooter>
-					<Button color="primary">Delete</Button>{" "}
+					<Button color="primary" onClick={handleDelete}>
+						Delete
+					</Button>{" "}
 					<Button color="secondary" onClick={toggle}>
-						{props.id}
+						Cancel
 					</Button>
 				</ModalFooter>
 			</Modal>

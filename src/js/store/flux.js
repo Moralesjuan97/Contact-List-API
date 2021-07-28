@@ -56,7 +56,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				fetch("https://assets.breatheco.de/apis/fake/contact/" + id, {
 					method: "DELETE"
 				}).then(() => {
-					fetch("https://assets.breatheco.de/apis/fake/contact/agenda/juans_agenda")
+					fetch("https://assets.breatheco.de/apis/fake/contact/")
 						.then(res => res.json())
 						.then(data => {
 							setStore({ contacts: data });
