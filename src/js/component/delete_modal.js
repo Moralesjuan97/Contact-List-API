@@ -13,6 +13,7 @@ export const ModalExample = props => {
 
 	const handleDelete = () => {
 		actions.deleteContact(props.id);
+		toggle();
 	};
 
 	return (

@@ -55,13 +55,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 			deleteContact: id => {
 				fetch("https://assets.breatheco.de/apis/fake/contact/" + id, {
 					method: "DELETE"
-				}).then(() => {
-					fetch("https://assets.breatheco.de/apis/fake/contact/")
-						.then(res => res.json())
-						.then(data => {
-							setStore({ contacts: data });
-						});
-				});
+				})
+					.then(() => {
+						fetch("https://assets.breatheco.de/apis/fake/contact/")
+							.then(res => res.json())
+							.then(data => {
+								return data;
+								//setStore({ contacts: data });
+							});
+					})
+					.then(() => {
+						fetch("https://assets.breatheco.de/apis/fake/contact/agenda/juans_agenda")
+							.then(res => res.json())
+							.then(data => {
+								//return data
+								setStore({ contacts: data });
+							});
+					});
 			}
 		}
 	};

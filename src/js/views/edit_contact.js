@@ -71,6 +71,11 @@ export const Edit = props => {
 					<button type="button" className="mt-2 btn btn-primary btn-block" onClick={handleEdit}>
 						Save changes
 					</button>
+					<Link to="/">
+						<a href="#" className="badge badge-dark">
+							Go back to contacts
+						</a>
+					</Link>
 				</div>
 			</form>
 		</div>
