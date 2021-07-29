@@ -7,11 +7,14 @@ export const Add = () => {
 	const [email, setEmail] = useState("");
 	const [phone, setPhone] = useState("");
 	const [address, setAddress] = useState("");
+	const [toggle, setToggle] = useState(false);
 	const { store, actions } = useContext(Context);
+
+	const toggleImage = () => setToggle(!toggle);
 
 	const handleSubmit = () => {
 		actions.addContact(name, email, phone, address);
-		setName("");
+		toggleImage();
 	};
 
 	return (
@@ -50,6 +53,11 @@ export const Add = () => {
 					<button type="button" className="mt-2 btn btn-primary btn-block" onClick={handleSubmit}>
 						Save
 					</button>
+					{toggle && (
+						<div className="mt-2 alert alert-success" role="alert">
+							Succesfully added a new contact!
+						</div>
+					)}
 					<Link to="/">
 						<a href="#" className="badge badge-dark">
 							Go back to contacts

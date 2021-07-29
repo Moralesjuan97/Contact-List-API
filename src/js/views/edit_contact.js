@@ -11,6 +11,10 @@ export const Edit = props => {
 	const [phone, setPhone] = useState("");
 	const [address, setAddress] = useState("");
 
+	const [toggle, settoggle] = useState(false);
+
+	const toggleMessage = () => settoggle(!toggle);
+
 	useEffect(() => {
 		getContact();
 	}, []);
@@ -29,7 +33,7 @@ export const Edit = props => {
 
 	const handleEdit = () => {
 		actions.editContact(contact_id, name, email, phone, address);
-		alert("Change Succesful");
+		toggleMessage();
 	};
 
 	return (
@@ -71,6 +75,11 @@ export const Edit = props => {
 					<button type="button" className="mt-2 btn btn-primary btn-block" onClick={handleEdit}>
 						Save changes
 					</button>
+					{toggle && (
+						<div className="mt-2 alert alert-success" role="alert">
+							Edited succesfully!
+						</div>
+					)}
 					<Link to="/">
 						<a href="#" className="badge badge-dark">
 							Go back to contacts
