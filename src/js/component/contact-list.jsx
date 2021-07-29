@@ -21,7 +21,7 @@ export const Contact = () => {
 		<div>
 			{store.contacts.map((contact, index) => {
 				return (
-					<div key={index} className="container border">
+					<div key={index} className="my-2 container border">
 						<div className="row">
 							<div className="col">
 								<a href="https://placeholder.com" className="">

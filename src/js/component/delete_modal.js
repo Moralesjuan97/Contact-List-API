@@ -25,7 +25,7 @@ export const ModalExample = props => {
 				<ModalHeader toggle={toggle}>Warning</ModalHeader>
 				<ModalBody>Are you sure you want to delete this contact?</ModalBody>
 				<ModalFooter>
-					<Button color="primary" onClick={handleDelete}>
+					<Button color="danger" onClick={handleDelete}>
 						Delete
 					</Button>{" "}
 					<Button color="secondary" onClick={toggle}>

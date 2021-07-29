@@ -11,6 +11,7 @@ export const Add = () => {
 
 	const handleSubmit = () => {
 		actions.addContact(name, email, phone, address);
+		setName("");
 	};
 
 	return (
